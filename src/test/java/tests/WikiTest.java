@@ -25,9 +25,6 @@ public class WikiTest  {
 	private String baseURL = "https://www.wikipedia.org/";
 	private WebDriver driver;
 
-
-	//prueba actualización a github
-
 	@BeforeSuite
 	public void setup(){
 		System.setProperty("webdriver.chrome.driver",PATHDRIVER+"chromedriver.exe");

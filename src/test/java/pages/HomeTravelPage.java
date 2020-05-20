@@ -56,7 +56,7 @@ public class HomeTravelPage {
         wait=new WebDriverWait(driver, 10);
     }
 
-    public void buscarVuelo(String aeropuertoSalida, String aeropuertoLLegada, String fechaSalida, String fechaLLegada) {
+    public void buscarVuelo(String aeropuertoSalida, String aeropuertoLLegada) {
         wait.until(ExpectedConditions.elementToBeClickable(flightButton));
         flightButton.click();
 

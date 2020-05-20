@@ -1,6 +1,7 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -13,6 +14,7 @@ import pages.HomeTravelPage;
 import pages.HomeWikiPage;
 import pages.ResultWikiPage;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Exam1Test {
@@ -35,7 +37,7 @@ public class Exam1Test {
         driver.get(baseURL);
 
         HomeTravelPage home=new HomeTravelPage(driver);
-        home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)", "07/18/2020", "07/25/2020");
+        home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)");
         FlightsResult flightsResult=new FlightsResult(driver);
         Assert.assertEquals(flightsResult.getbuttonDropdown(), "Sort by\n" +
                 "Price (Lowest)\n" +
@@ -46,7 +48,6 @@ public class Exam1Test {
                 "Departure (Latest)\n" +
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
-
         flightsResult.getListButtons();
     }
 

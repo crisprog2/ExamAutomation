@@ -46,11 +46,16 @@ public class FlightsResult {
 
     public List<WebElement> getListButtons(){
 
-        /*Se debe arreglar esta parte para que solo guarde la información de los botones que tienen como texto select ya que está trayendo todos los botones
-        incluyendo unos "hidden" que no traen texto y por lo tanto la lista se llena de nulls
-         */
+        List<WebElement> buttonsSelect=new ArrayList<WebElement>();
         List<WebElement> allButtonsInList=listaResultadoElementos.findElements(By.className("btn-label"));
-        return allButtonsInList;
+
+        for (int i = 0; i < allButtonsInList.size() ; i++) {
+            if (allButtonsInList.get(i).getText().contains("Select")){
+                buttonsSelect.add(allButtonsInList.get(i));
+            }
+        }
+
+        return buttonsSelect;
     }
 
 }

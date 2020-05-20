@@ -28,7 +28,7 @@ public class Exam1Test {
         driver = new ChromeDriver(options);
     }
 
-    //@Parameters({"busqueda"})
+    //@Parameters({"busqueda"}) Prueba dos de subida a Github
     @Test
     public void testFlightsSearch(){
         driver.get(baseURL);

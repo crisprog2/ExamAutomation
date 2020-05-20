@@ -34,7 +34,6 @@ public class FlightsResult {
     @FindBy(id = "flightModuleList")
     private WebElement listaResultadoElementos;
 
-
     public String getPageTitle() {
         return titleBar.getText();
     }
@@ -44,7 +43,7 @@ public class FlightsResult {
         return buttonDropdown.getText();
     }
 
-    public List<WebElement> /*void*/ getListButtons(){
+    public List<WebElement> getListButtons(){
 
         List<WebElement> buttonsSelect=new ArrayList<WebElement>();
         List<WebElement> allButtonsInList=listaResultadoElementos.findElements(By.className("btn-label"));
@@ -56,6 +55,24 @@ public class FlightsResult {
         }
 
         return buttonsSelect;
+    }
+
+    public List<WebElement> getListFlightDuration(){
+        List<WebElement> allSpanInList=listaResultadoElementos.findElements(By.className("duration-emphasis"));
+        return allSpanInList;
+    }
+
+    public List<WebElement> getListLinkFlightBagageDetail(){
+        List<WebElement> allLinks=listaResultadoElementos.findElements(By.tagName("a"));
+        List<WebElement> textLink=new ArrayList<WebElement>();
+        for (int i = 0; i < allLinks.size() ; i++) {
+            if (allLinks.get(i).getText().contains("Details")){
+                textLink.add(allLinks.get(i));
+            }
+        }
+
+        return textLink;
+
     }
 
 }

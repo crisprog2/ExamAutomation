@@ -44,7 +44,7 @@ public class FlightsResult {
         return buttonDropdown.getText();
     }
 
-    public List<WebElement> getListButtons(){
+    public List<WebElement> /*void*/ getListButtons(){
 
         List<WebElement> buttonsSelect=new ArrayList<WebElement>();
         List<WebElement> allButtonsInList=listaResultadoElementos.findElements(By.className("btn-label"));

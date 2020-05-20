@@ -48,7 +48,9 @@ public class Exam1Test {
                 "Departure (Latest)\n" +
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
-        flightsResult.getListButtons();
+        for (int i = 0; i < flightsResult.getListButtons().size(); i++) {
+            Assert.assertTrue(flightsResult.getListButtons().get(i).getText().contains("Select"));
+        }
     }
 
     @AfterSuite

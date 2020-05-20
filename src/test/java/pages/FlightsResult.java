@@ -52,17 +52,15 @@ public class FlightsResult {
         //return buttonSelect.getText();
     }
 
-    ///html//ul[@id='flightModuleList']/li[1]/div[1]/div[1]//button[@type='button']
-
     public void getListButtons(){
 
-        List<WebElement> allLi=listaResultadoElementos.findElements(By.tagName("li"));
+        List<WebElement> allLi=listaResultadoElementos.findElements(By.className("btn-label"));
         List<WebElement> specifiedListLi=new ArrayList<WebElement>();
-        for (int i = 0; i < allLi.size(); i++) {
-            specifiedListLi.add(allLi.get(i).findElement(By.className("flight-module segment offer-listing")));
-        }
         System.out.println(allLi.size());
-        //System.out.println(specifiedListLi.size());
+        for (int i = 0; i < allLi.size(); i++) {
+            System.out.println(allLi.get(i).getText());
+            System.out.println();
+        }
     }
 
 }

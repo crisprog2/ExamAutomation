@@ -34,6 +34,8 @@ public class WikiTest  {
 		driver = new ChromeDriver(options);
 	}
 
+	//prueba git
+
 	@Parameters({"busqueda"})
 	@Test
 	public void testWikiSearch(String busqueda) throws InterruptedException {

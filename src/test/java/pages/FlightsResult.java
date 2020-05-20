@@ -31,9 +31,6 @@ public class FlightsResult {
     @FindBy(xpath = "/html//div[@id='sortBar']")
     private WebElement buttonDropdown;
 
-    @FindBy(xpath = "/html//ul[@id='flightModuleList']/li[1]/div[1]/div[1]//button[@type='button']")
-    private WebElement buttonSelect;
-
     @FindBy(id = "flightModuleList")
     private WebElement listaResultadoElementos;
 
@@ -47,20 +44,14 @@ public class FlightsResult {
         return buttonDropdown.getText();
     }
 
-    public void getbuttonsListResult(){
-        wait.until(ExpectedConditions.elementToBeClickable(buttonSelect));
-        //return buttonSelect.getText();
-    }
+    public List<WebElement> getListButtons(){
 
-    public void getListButtons(){
+        /*Se debe arreglar esta parte para que solo guarde la información de los botones que tienen como texto select ya que está trayendo todos los botones
+        incluyendo unos "hidden" que no traen texto y por lo tanto la lista se llena de nulls
+         */
 
-        List<WebElement> allLi=listaResultadoElementos.findElements(By.className("btn-label"));
-        List<WebElement> specifiedListLi=new ArrayList<WebElement>();
-        System.out.println(allLi.size());
-        for (int i = 0; i < allLi.size(); i++) {
-            System.out.println(allLi.get(i).getText());
-            System.out.println();
-        }
+        List<WebElement> allButtonsInList=listaResultadoElementos.findElements(By.className("btn-label"));
+        return allButtonsInList;
     }
 
 }

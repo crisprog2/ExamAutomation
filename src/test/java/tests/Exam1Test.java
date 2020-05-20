@@ -13,6 +13,8 @@ import pages.HomeTravelPage;
 import pages.HomeWikiPage;
 import pages.ResultWikiPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class Exam1Test {
 
     private String PATHDRIVER = "src/test/resources/driver/";
@@ -29,11 +31,11 @@ public class Exam1Test {
     }
 
     @Test
-    public void testFlightsSearch(){
+    public void testFlightsSearch() {
         driver.get(baseURL);
 
         HomeTravelPage home=new HomeTravelPage(driver);
-        home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)", "07/18/2020", "07/20/2020");
+        home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)", "07/18/2020", "07/25/2020");
         FlightsResult flightsResult=new FlightsResult(driver);
         Assert.assertEquals(flightsResult.getbuttonDropdown(), "Sort by\n" +
                 "Price (Lowest)\n" +
@@ -44,14 +46,6 @@ public class Exam1Test {
                 "Departure (Latest)\n" +
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
-
-        Assert.assertEquals(flightsResult.getPageTitle(), "Select your departure to Los Angeles Sat, Jul 18\n" +
-                "Prices are roundtrip per person, include all taxes and fees, but do not include baggage fees.");
-
-        flightsResult.getbuttonsListResult();
-
-        flightsResult.getListButtons();
-
     }
 
     @AfterSuite

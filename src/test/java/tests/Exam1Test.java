@@ -46,6 +46,8 @@ public class Exam1Test {
                 "Departure (Latest)\n" +
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
+
+        flightsResult.getListButtons();
     }
 
     @AfterSuite

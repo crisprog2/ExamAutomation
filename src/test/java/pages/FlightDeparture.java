@@ -13,15 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class FlightsResult {
+public class FlightDeparture {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private WebDriverWait wait1;
 
-    public FlightsResult(WebDriver driver) {
+    public FlightDeparture(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         wait=new WebDriverWait(driver, 10);
+        wait1=new WebDriverWait(driver, 60);
     }
 
     /**
@@ -75,25 +77,27 @@ public class FlightsResult {
         return textLink;
     }
 
-    public void sortByDuration() throws InterruptedException {
+    public void sortByDuration() {
         WebElement dropDownButton=driver.findElement(By.id("sortDropdown"));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownButton));
         dropDownButton.click();
         Select sortDropdown=new Select(driver.findElement(By.id("sortDropdown")));
         sortDropdown.selectByVisibleText("Duration (Shortest)");
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        WebElement listResult=driver.findElement(By.xpath("//*[@id=\"flightModuleList\"]"));
-        List<WebElement> allButtonsInList=listResult.findElements(By.tagName("button")/*By.className("btn-label")*/);
-        for (int i = 0; i < allButtonsInList.size(); i++) {
-            System.out.println(allButtonsInList.get(i).getText());
+    }
+
+
+    public void selectResult(){
+        WebElement listResult=driver.findElement(By.cssSelector("ul#flightModuleList.segmented-list.results-list.duration-sort"));
+        wait1.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//*[@id=\"flightModuleList\"]"))));
+        List<WebElement> allElementsInList=listResult.findElements(By.tagName("li"));
+
+        List<WebElement> allButttonsInLi=allElementsInList.get(0).findElements(By.tagName("button"));
+        for (int i = 0; i < allButttonsInLi.size(); i++) {
+            System.out.println(allButttonsInLi.get(i).getText());
         }
-        //
-        if(allButtonsInList.get(0).getText().contains("Select")){
-            allButtonsInList.get(0).click();
-        }
-        WebElement butonSelectThisFare=driver.findElement(By.xpath("/html//ul[@id='flightModuleList']/li[1]/div[@class='basic-economy-tray uitk-grid']/div//button[@type='button']"));
-        wait.until(ExpectedConditions.elementToBeClickable(butonSelectThisFare));
-        butonSelectThisFare.click();
+        allButttonsInLi.get(0).click();
+        wait.until(ExpectedConditions.elementToBeClickable(allButttonsInLi.get(2)));
+        allButttonsInLi.get(2).click();
     }
 
 }

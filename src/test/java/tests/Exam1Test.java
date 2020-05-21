@@ -7,10 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import pages.FlightsResult;
+import pages.FlightDeparture;
 import pages.HomeTravelPage;
-
-import java.util.concurrent.TimeUnit;
 
 //Esta clase define el escenario a probar
 public class Exam1Test  {
@@ -35,11 +33,11 @@ public class Exam1Test  {
 
         //Ejecuta la busqueda del vuelo en la pagina home
         home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)");
-        FlightsResult flightsResult=new FlightsResult(driver);
+        FlightDeparture flightDeparture =new FlightDeparture(driver);
 
 
         //Realiza la validación de que hay un dropdown en la página de vuelos
-        Assert.assertEquals(flightsResult.getbuttonDropdown(), "Sort by\n" +
+        Assert.assertEquals(flightDeparture.getbuttonDropdown(), "Sort by\n" +
                 "Price (Lowest)\n" +
                 "Price (Highest)\n" +
                 "Duration (Shortest)\n" +
@@ -49,27 +47,33 @@ public class Exam1Test  {
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
 
-        /*
+
         //Realiza la validación de que están los botones "Select" en todos los resultados en la página de vuelos
-        for (int i = 0; i < flightsResult.getListButtons().size(); i++) {
-            System.out.println(flightsResult.getListButtons().get(i).getText());
-            Assert.assertTrue(flightsResult.getListButtons().get(i).getText().contains("Select"));
+        for (int i = 0; i < flightDeparture.getListButtons().size(); i++) {
+            System.out.println(flightDeparture.getListButtons().get(i).getText());
+            Assert.assertTrue(flightDeparture.getListButtons().get(i).getText().contains("Select"));
         }
         //Realiza la validación de que la duración del vuelo está presente en todos resultados en la página de vuelos
-        for (int i = 0; i < flightsResult.getListFlightDuration().size(); i++) {
-            System.out.println(flightsResult.getListFlightDuration().get(i).getText());
-            Assert.assertTrue(!flightsResult.getListFlightDuration().get(i).getText().isEmpty());
+        for (int i = 0; i < flightDeparture.getListFlightDuration().size(); i++) {
+            System.out.println(flightDeparture.getListFlightDuration().get(i).getText());
+            Assert.assertTrue(!flightDeparture.getListFlightDuration().get(i).getText().isEmpty());
         }
 
         //Realiza la validación de que los links de flight details están presente en todos resultados en la página de vuelos
-        for (int i = 0; i < flightsResult.getListLinkFlightBagageDetail().size(); i++) {
-            System.out.println(flightsResult.getListLinkFlightBagageDetail().get(i).getText());
-            Assert.assertTrue(flightsResult.getListLinkFlightBagageDetail().get(i).getText().contains("Details & baggage fees"));
-        }*/
+        for (int i = 0; i < flightDeparture.getListLinkFlightBagageDetail().size(); i++) {
+            System.out.println(flightDeparture.getListLinkFlightBagageDetail().get(i).getText());
+            Assert.assertTrue(flightDeparture.getListLinkFlightBagageDetail().get(i).getText().contains("Details & baggage fees"));
+        }
 
-        flightsResult.sortByDuration();
+        //Realiza la acción de filtrar por duración
+        flightDeparture.sortByDuration();
 
+        //Realiza la acción de seleccionar el primer resultado después de que se filtra por la duración
+        flightDeparture.selectResult();
     }
+
+
+
 
     @AfterSuite
     public void close(){

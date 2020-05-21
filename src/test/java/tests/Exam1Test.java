@@ -1,20 +1,15 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.FlightsResult;
 import pages.HomeTravelPage;
-import pages.HomeWikiPage;
-import pages.ResultWikiPage;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //Esta clase define el escenario a probar
@@ -42,6 +37,7 @@ public class Exam1Test  {
         home.buscarVuelo("Las Vegas (LAS-All Airports)", "Los Angeles, CA (LAX-Los Angeles Intl.)");
         FlightsResult flightsResult=new FlightsResult(driver);
 
+
         //Realiza la validación de que hay un dropdown en la página de vuelos
         Assert.assertEquals(flightsResult.getbuttonDropdown(), "Sort by\n" +
                 "Price (Lowest)\n" +
@@ -52,6 +48,8 @@ public class Exam1Test  {
                 "Departure (Latest)\n" +
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
+
+        /*
         //Realiza la validación de que están los botones "Select" en todos los resultados en la página de vuelos
         for (int i = 0; i < flightsResult.getListButtons().size(); i++) {
             System.out.println(flightsResult.getListButtons().get(i).getText());
@@ -67,9 +65,11 @@ public class Exam1Test  {
         for (int i = 0; i < flightsResult.getListLinkFlightBagageDetail().size(); i++) {
             System.out.println(flightsResult.getListLinkFlightBagageDetail().get(i).getText());
             Assert.assertTrue(flightsResult.getListLinkFlightBagageDetail().get(i).getText().contains("Details & baggage fees"));
-        }
+        }*/
 
+        flightsResult.sortByDuration();
 
+        flightsResult.getListSelectButtons();
     }
 
     @AfterSuite

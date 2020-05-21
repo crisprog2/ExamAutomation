@@ -6,10 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class FlightsResult {
 
@@ -19,7 +21,7 @@ public class FlightsResult {
     public FlightsResult(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        wait=new WebDriverWait(driver, 20);
+        wait=new WebDriverWait(driver, 10);
     }
 
     /**
@@ -70,9 +72,16 @@ public class FlightsResult {
                 textLink.add(allLinks.get(i));
             }
         }
-
         return textLink;
+    }
 
+    public void sortByDuration() {
+        WebElement dropDownButton=driver.findElement(By.id("sortDropdown"));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownButton));
+        dropDownButton.click();
+        Select sortDropdown=new Select(driver.findElement(By.id("sortDropdown")));
+        sortDropdown.selectByVisibleText("Duration (Shortest)");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 }

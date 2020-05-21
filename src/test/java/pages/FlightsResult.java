@@ -75,13 +75,25 @@ public class FlightsResult {
         return textLink;
     }
 
-    public void sortByDuration() {
+    public void sortByDuration() throws InterruptedException {
         WebElement dropDownButton=driver.findElement(By.id("sortDropdown"));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownButton));
         dropDownButton.click();
         Select sortDropdown=new Select(driver.findElement(By.id("sortDropdown")));
         sortDropdown.selectByVisibleText("Duration (Shortest)");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        WebElement listResult=driver.findElement(By.xpath("//*[@id=\"flightModuleList\"]"));
+        List<WebElement> allButtonsInList=listResult.findElements(By.tagName("button")/*By.className("btn-label")*/);
+        for (int i = 0; i < allButtonsInList.size(); i++) {
+            System.out.println(allButtonsInList.get(i).getText());
+        }
+        //
+        if(allButtonsInList.get(0).getText().contains("Select")){
+            allButtonsInList.get(0).click();
+        }
+        WebElement butonSelectThisFare=driver.findElement(By.xpath("/html//ul[@id='flightModuleList']/li[1]/div[@class='basic-economy-tray uitk-grid']/div//button[@type='button']"));
+        wait.until(ExpectedConditions.elementToBeClickable(butonSelectThisFare));
+        butonSelectThisFare.click();
     }
 
 }

@@ -29,7 +29,7 @@ public class Exam1Test  {
     }
 
     @Test //define un caso de prueba
-    public void testFlightsSearch() {
+    public void testFlightsSearch() throws InterruptedException {
         driver.get(baseURL);
         HomeTravelPage home=new HomeTravelPage(driver);
 
@@ -69,7 +69,6 @@ public class Exam1Test  {
 
         flightsResult.sortByDuration();
 
-        flightsResult.getListSelectButtons();
     }
 
     @AfterSuite

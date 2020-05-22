@@ -68,16 +68,19 @@ public class HomeTravelPage {
         buttonNextDateCalendarDeparting.click();
         buttonNextDateCalendarDeparting.click();
         List<WebElement> calendarMonthDeparting=monthRightDeparting.findElements(By.tagName("button"));
-        WebElement dayMonthDeparting=calendarMonthDeparting.get(3);
+        WebElement dayMonthDeparting=calendarMonthDeparting.get(17);
+        System.out.println(dayMonthDeparting.getText());
         dayMonthDeparting.click();
 
         returningDate.click();
         List<WebElement> calendarMonthReturning=monthRightReturning.findElements(By.tagName("button"));
-        WebElement dayMonthReturning=calendarMonthReturning.get(5);
+        WebElement dayMonthReturning=calendarMonthReturning.get(18);
+        System.out.println(dayMonthReturning.getText());
         dayMonthReturning.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(buttonSearch));
         buttonSearch.click();
+        System.out.println("//////////////////");
 
     }
 

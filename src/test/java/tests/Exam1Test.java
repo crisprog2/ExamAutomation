@@ -8,6 +8,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.FlightDeparture;
+import pages.FlightReturn;
 import pages.HomeTravelPage;
 
 //Esta clase define el escenario a probar
@@ -27,7 +28,7 @@ public class Exam1Test  {
     }
 
     @Test //define un caso de prueba
-    public void testFlightsSearch() throws InterruptedException {
+    public void testFlightsSearch() {
         driver.get(baseURL);
         HomeTravelPage home=new HomeTravelPage(driver);
 
@@ -47,7 +48,7 @@ public class Exam1Test  {
                 "Arrival (Earliest)\n" +
                 "Arrival (Latest)");
 
-
+        /*
         //Realiza la validación de que están los botones "Select" en todos los resultados en la página de vuelos
         for (int i = 0; i < flightDeparture.getListButtons().size(); i++) {
             System.out.println(flightDeparture.getListButtons().get(i).getText());
@@ -63,13 +64,19 @@ public class Exam1Test  {
         for (int i = 0; i < flightDeparture.getListLinkFlightBagageDetail().size(); i++) {
             System.out.println(flightDeparture.getListLinkFlightBagageDetail().get(i).getText());
             Assert.assertTrue(flightDeparture.getListLinkFlightBagageDetail().get(i).getText().contains("Details & baggage fees"));
-        }
+        }*/
 
         //Realiza la acción de filtrar por duración
         flightDeparture.sortByDuration();
 
         //Realiza la acción de seleccionar el primer resultado después de que se filtra por la duración
         flightDeparture.selectResult();
+
+
+        FlightReturn flightReturn =new FlightReturn(driver);
+
+        flightReturn.selectResult();
+
     }
 
 

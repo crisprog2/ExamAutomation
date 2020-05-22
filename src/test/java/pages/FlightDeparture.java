@@ -17,13 +17,11 @@ public class FlightDeparture {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private WebDriverWait wait1;
 
     public FlightDeparture(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         wait=new WebDriverWait(driver, 10);
-        wait1=new WebDriverWait(driver, 60);
     }
 
     /**
@@ -37,10 +35,6 @@ public class FlightDeparture {
 
     @FindBy(id = "flightModuleList")
     private WebElement listaResultadoElementos;
-
-    public String getPageTitle() {
-        return titleBar.getText();
-    }
 
     public String getbuttonDropdown() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html//div[@id='sortBar']")));
@@ -85,16 +79,11 @@ public class FlightDeparture {
         sortDropdown.selectByVisibleText("Duration (Shortest)");
     }
 
-
     public void selectResult(){
         WebElement listResult=driver.findElement(By.cssSelector("ul#flightModuleList.segmented-list.results-list.duration-sort"));
-        wait1.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//*[@id=\"flightModuleList\"]"))));
+        wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//*[@id=\"flightModuleList\"]"))));
         List<WebElement> allElementsInList=listResult.findElements(By.tagName("li"));
-
         List<WebElement> allButttonsInLi=allElementsInList.get(0).findElements(By.tagName("button"));
-        for (int i = 0; i < allButttonsInLi.size(); i++) {
-            System.out.println(allButttonsInLi.get(i).getText());
-        }
         allButttonsInLi.get(0).click();
         wait.until(ExpectedConditions.elementToBeClickable(allButttonsInLi.get(2)));
         allButttonsInLi.get(2).click();
